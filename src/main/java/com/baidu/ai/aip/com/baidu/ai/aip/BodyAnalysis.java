@@ -3,7 +3,6 @@ package com.baidu.ai.aip.com.baidu.ai.aip;
 import com.baidu.ai.aip.utils.Base64Util;
 import com.baidu.ai.aip.utils.FileUtil;
 import com.baidu.ai.aip.utils.HttpUtil;
-import com.baidu.aip.imageclassify.AipImageClassify;
 
 import java.net.URLEncoder;
 
@@ -43,23 +42,4 @@ public class BodyAnalysis {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        BodyAnalysis.bodyAnalysis();
-    }
-    // 初始化一个AipImageClassify
-    AipImageClassify client = new AipImageClassify(APP_ID, API_KEY, SECRET_KEY);
-
-    // 可选：设置网络连接参数
-        client.setConnectionTimeoutInMillis(2000);
-        client.setSocketTimeoutInMillis(60000);
-
-
-    // 调用接口
-    String path = "/home/abc/Desktop/apple.jpg";
-
-    SampleImage sample=new SampleImage();
-        sample.image(client,path);
-
-
 }
