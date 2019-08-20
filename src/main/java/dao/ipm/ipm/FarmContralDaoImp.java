@@ -1,3 +1,4 @@
+/*
 package dao.ipm.ipm;
 
 import org.apache.ibatis.io.Resources;
@@ -73,3 +74,4 @@ public class FarmContralDaoImp implements FarmContralDao {
         }
     }
 }
+*/
