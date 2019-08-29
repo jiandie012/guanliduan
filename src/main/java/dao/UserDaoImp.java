@@ -1,33 +1,32 @@
-/*
-package dao.ipm.ipm;
+package dao;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import tapDame.dao.FarmContralDao;
-import tapDame.pojo.FarmControl;
+import tapDame.dao.UserDao;
+import tapDame.pojo.User;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-public class FarmContralDaoImp implements FarmContralDao {
+public class UserDaoImp implements UserDao {
+
 
     private SqlSession session;
 
     @Override
-    public FarmControl findByHT(String humidity,String tmp) {
+    public User findByPhone(String phone) {
 
-        FarmControl farmControl=new FarmControl();
+        User user=new User();
 
-        System.out.println(humidity+"\t");
         try {
             InputStream inputStream= Resources.getResourceAsStream("mybatis/mybatis.xml");
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             session=sqlSessionFactory.openSession();
 
-            FarmContralDao farmContralDao=session.getMapper(FarmContralDao.class);
-            farmControl=farmContralDao.findByHT(humidity,tmp);
+            UserDao userDao=session.getMapper(UserDao.class);
+            user=userDao.findByPhone(phone);
 
             session.commit();
         }catch (IOException e) {
@@ -35,18 +34,16 @@ public class FarmContralDaoImp implements FarmContralDao {
         } finally {
             session.close();
         }
-
-        return farmControl;
-
+        return user;
     }
 
     @Override
-    public void addFarmContral(FarmControl farmControl) {
+    public void addUser(User user) {
         try {
             InputStream inputStream= Resources.getResourceAsStream("mybatis/mybatis.xml");
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             session=sqlSessionFactory.openSession();
-            session.insert("addFarmControl",farmControl);
+            session.insert("addUser",user);
 
             session.commit();
 
@@ -58,12 +55,12 @@ public class FarmContralDaoImp implements FarmContralDao {
     }
 
     @Override
-    public void updateFarmContral(FarmControl farmControl) {
+    public void updateUser(User user) {
         try {
             InputStream inputStream= Resources.getResourceAsStream("mybatis/mybatis.xml");
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             session=sqlSessionFactory.openSession();
-            session.insert("updateFarmContral",farmControl);
+            session.insert("updateUser",user);
 
             session.commit();
 
@@ -73,5 +70,22 @@ public class FarmContralDaoImp implements FarmContralDao {
             session.close();
         }
     }
+
+    @Override
+    public void delUser(String phone) {
+        try {
+            InputStream inputStream= Resources.getResourceAsStream("mybatis/mybatis.xml");
+            SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+            session=sqlSessionFactory.openSession();
+            session.insert("delUser",phone);
+
+            session.commit();
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
 }
-*/

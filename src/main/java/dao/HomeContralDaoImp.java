@@ -1,32 +1,31 @@
-package dao.ipm.ipm;
+package dao;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import tapDame.dao.UserDao;
-import tapDame.pojo.User;
+import tapDame.dao.HomeContralDao;
+import tapDame.pojo.HomeContral;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-public class UserDaoImp implements UserDao {
-
+public class HomeContralDaoImp implements HomeContralDao {
 
     private SqlSession session;
 
     @Override
-    public User findByPhone(String phone) {
+    public HomeContral findByType(String type) {
 
-        User user=new User();
+        HomeContral homeContral=new HomeContral();
 
         try {
             InputStream inputStream= Resources.getResourceAsStream("mybatis/mybatis.xml");
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             session=sqlSessionFactory.openSession();
 
-            UserDao userDao=session.getMapper(UserDao.class);
-            user=userDao.findByPhone(phone);
+            HomeContralDao homeStatusDao=session.getMapper(HomeContralDao.class);
+            homeContral=homeStatusDao.findByType(type);
 
             session.commit();
         }catch (IOException e) {
@@ -34,33 +33,18 @@ public class UserDaoImp implements UserDao {
         } finally {
             session.close();
         }
-        return user;
+
+        return homeContral;
+
     }
 
     @Override
-    public void addUser(User user) {
+    public void addHomeContral(HomeContral homeContral) {
         try {
             InputStream inputStream= Resources.getResourceAsStream("mybatis/mybatis.xml");
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             session=sqlSessionFactory.openSession();
-            session.insert("addUser",user);
-
-            session.commit();
-
-        }catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
-    @Override
-    public void updateUser(User user) {
-        try {
-            InputStream inputStream= Resources.getResourceAsStream("mybatis/mybatis.xml");
-            SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-            session=sqlSessionFactory.openSession();
-            session.insert("updateUser",user);
+            session.insert("addHomeContral",homeContral);
 
             session.commit();
 
@@ -72,12 +56,12 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public void delUser(String phone) {
+    public void updateHomeContral(HomeContral homeContral) {
         try {
             InputStream inputStream= Resources.getResourceAsStream("mybatis/mybatis.xml");
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             session=sqlSessionFactory.openSession();
-            session.insert("delUser",phone);
+            session.insert("updateHomeContral",homeContral);
 
             session.commit();
 
@@ -87,5 +71,6 @@ public class UserDaoImp implements UserDao {
             session.close();
         }
     }
+
 
 }

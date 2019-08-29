@@ -1,31 +1,30 @@
-/*
-package dao.ipm.ipm;
+package dao;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import tapDame.dao.FarmStatusDao;
-import tapDame.pojo.FarmStatus;
+import tapDame.dao.HomeStatusDao;
+import tapDame.pojo.HomeStatus;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-public class FarmStatusDaoImp implements FarmStatusDao {
+public class HomeStatusDaoImp implements HomeStatusDao {
 
     private SqlSession session;
 
     @Override
-    public FarmStatus findByFId(String id) {
-        FarmStatus farmStatus=new FarmStatus();
+    public HomeStatus findByHId(String id) {
+        HomeStatus homeStatus=new HomeStatus();
 
         try {
             InputStream inputStream= Resources.getResourceAsStream("mybatis/mybatis.xml");
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             session=sqlSessionFactory.openSession();
 
-            FarmStatusDao homeStatusDao=session.getMapper(FarmStatusDao.class);
-            farmStatus=homeStatusDao.findByFId(id);
+            HomeStatusDao homeStatusDao=session.getMapper(HomeStatusDao.class);
+            homeStatus=homeStatusDao.findByHId(id);
 
             session.commit();
         }catch (IOException e) {
@@ -34,33 +33,16 @@ public class FarmStatusDaoImp implements FarmStatusDao {
             session.close();
         }
 
-        return farmStatus;
+        return homeStatus;
     }
 
     @Override
-    public void addFarmStatus(FarmStatus farmStatus) {
+    public void addHomeStatus(HomeStatus homeStatus) {
         try {
             InputStream inputStream= Resources.getResourceAsStream("mybatis/mybatis.xml");
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             session=sqlSessionFactory.openSession();
-            session.insert("addFarmStatus",farmStatus);
-
-            session.commit();
-
-        }catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
-    @Override
-    public void updateFarmStatus(FarmStatus farmStatus) {
-        try {
-            InputStream inputStream= Resources.getResourceAsStream("mybatis/mybatis.xml");
-            SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-            session=sqlSessionFactory.openSession();
-            session.insert("updateFarmStatus",farmStatus);
+            session.insert("addHomeStatus",homeStatus);
 
             session.commit();
 
@@ -72,12 +54,29 @@ public class FarmStatusDaoImp implements FarmStatusDao {
     }
 
     @Override
-    public void delFarmStatus(String id) {
+    public void updateHomeStatus(HomeStatus homeStatus) {
         try {
             InputStream inputStream= Resources.getResourceAsStream("mybatis/mybatis.xml");
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             session=sqlSessionFactory.openSession();
-            session.insert("delFarmStatus",id);
+            session.insert("updateHomeStatus",homeStatus);
+
+            session.commit();
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void delHomeStatus(String id) {
+        try {
+            InputStream inputStream= Resources.getResourceAsStream("mybatis/mybatis.xml");
+            SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+            session=sqlSessionFactory.openSession();
+            session.insert("delHomeStatus",id);
 
             session.commit();
 
@@ -89,4 +88,3 @@ public class FarmStatusDaoImp implements FarmStatusDao {
     }
 
 }
-*/
