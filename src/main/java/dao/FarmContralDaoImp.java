@@ -1,3 +1,4 @@
+/*
 
 package dao;
 import org.apache.ibatis.annotations.Param;
@@ -9,3 +10,4 @@ public interface FarmContralDao {
     void updateFarmContral(FarmControl farmControl);
 
 }
+*/
